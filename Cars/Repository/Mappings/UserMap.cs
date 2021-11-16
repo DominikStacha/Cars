@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using Cars.Domain.Entities;
+﻿using Cars.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cars.Repository.Mappings
