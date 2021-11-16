@@ -1,4 +1,5 @@
 using Cars.Repository;
+using Cars.Service.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("connection"))
 );
+AutoMapperConfiguration.Init();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
