@@ -7,7 +7,7 @@ namespace Cars.Domain.Entities
 {
     public class Car : EntityId, IUpdatable<Car>
     {
-        [PlateValidator] public string PlateNumber { get; set; }
+        public string PlateNumber { get; set; }
 
         public MakeEnum Make { get; set; }
         public string Model { get; set; }
