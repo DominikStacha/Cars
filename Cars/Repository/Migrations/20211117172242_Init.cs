@@ -27,7 +27,8 @@ namespace Cars.Repository.Migrations
                 name: "Car",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     PlateNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Make = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Model = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
@@ -37,11 +38,16 @@ namespace Cars.Repository.Migrations
                 {
                     table.PrimaryKey("PK_Car", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Car_User_Id",
-                        column: x => x.Id,
+                        name: "FK_Car_User_UserId",
+                        column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Car_UserId",
+                table: "Car",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_Email",

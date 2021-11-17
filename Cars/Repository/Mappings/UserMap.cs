@@ -26,7 +26,7 @@ namespace Cars.Repository.Mappings
 
                 entity.HasMany(e => e.Cars)
                     .WithOne(e => e.User)
-                    .HasForeignKey(e => e.Id)
+                    .HasForeignKey(e => e.UserId)
                     .OnDelete(DeleteBehavior.NoAction);
             });
         }

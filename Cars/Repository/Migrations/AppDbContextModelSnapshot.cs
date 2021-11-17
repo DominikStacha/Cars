@@ -24,7 +24,10 @@ namespace Cars.Repository.Migrations
             modelBuilder.Entity("Cars.Domain.Entities.Car", b =>
                 {
                     b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("Make")
                         .IsRequired()
@@ -45,6 +48,8 @@ namespace Cars.Repository.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Car");
                 });
@@ -84,7 +89,7 @@ namespace Cars.Repository.Migrations
                 {
                     b.HasOne("Cars.Domain.Entities.User", "User")
                         .WithMany("Cars")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
