@@ -30,7 +30,8 @@ namespace Cars.Repository.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false),
                     PlateNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Make = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Model = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    Model = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UserId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cars.Repository.Base
 {
-    public abstract class RepositoryBase<T> : IRepository<T> where T : EntityId
+    public class RepositoryBase<T> : IRepository<T> where T : EntityId
     {
         protected readonly AppDbContext _dbContext;
         protected readonly DbSet<T> _entitySet;

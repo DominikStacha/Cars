@@ -7,13 +7,13 @@ using Cars.Service.Mapping;
 
 namespace Cars.Service.Base
 {
-    public abstract class EntityBaseService<TEntity, TModel> : IService<TEntity, TModel>
+    public class EntityServiceBase<TEntity, TModel> : IService<TEntity, TModel>
         where TEntity : EntityId
         where TModel : ModelId
     {
         protected readonly IRepository<TEntity> _entityRepository;
 
-        public EntityBaseService(IRepository<TEntity> entityRepository)
+        public EntityServiceBase(IRepository<TEntity> entityRepository)
         {
             _entityRepository = entityRepository;
         }
