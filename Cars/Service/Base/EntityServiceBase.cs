@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cars.Domain.Base;
+using Cars.Domain.Interfaces;
 using Cars.Repository.Interfaces;
 using Cars.Service.Interfaces;
 using Cars.Service.Mapping;
@@ -8,7 +9,7 @@ using Cars.Service.Mapping;
 namespace Cars.Service.Base
 {
     public class EntityServiceBase<TEntity, TModel> : IService<TEntity, TModel>
-        where TEntity : EntityId
+        where TEntity : EntityId, IUpdatable<TEntity>
         where TModel : ModelId
     {
         protected readonly IRepository<TEntity> _entityRepository;
@@ -39,7 +40,9 @@ namespace Cars.Service.Base
 
         public async Task<TModel> UpdateAsync(TModel item)
         {
-            TEntity entity = item.MapTo<TModel, TEntity>();
+            var entity = await _entityRepository.Get(item.Id);
+            TEntity itemEntity = item.MapTo<TModel, TEntity>();
+            entity.Update(itemEntity);
             TEntity result = await _entityRepository.Update(entity);
             return result.MapTo<TEntity, TModel>();
         }

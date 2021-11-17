@@ -56,7 +56,6 @@ namespace Cars.Repository.Base
         public async Task<T> Update(T entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
-            _entitySet.Update(entity);
             await _dbContext.SaveChangesAsync();
             return await Get(entity.Id);
         }

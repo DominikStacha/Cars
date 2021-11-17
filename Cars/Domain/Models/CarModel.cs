@@ -8,6 +8,7 @@ namespace Cars.Domain.Models
         public string PlateNumber { get; set; }
         public MakeEnum Make { get; set; }
         public string Model { get; set; }
-        public UserModel User { get; set; }
+        public long UserId { get; set; }
+        public UserModel? User { get; set; }
     }
 }

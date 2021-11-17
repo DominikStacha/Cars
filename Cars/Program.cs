@@ -1,8 +1,10 @@
+using System.Text.Json.Serialization;
 using Cars.Domain.Entities;
 using Cars.Domain.Models;
 using Cars.Migrations;
 using Cars.Repository;
 using Cars.Repository.Base;
+using Cars.Repository.IncludeHelpers;
 using Cars.Repository.Interfaces;
 using Cars.Service.Base;
 using Cars.Service.Interfaces;
@@ -16,17 +18,22 @@ using Microsoft.Extensions.Hosting;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("connection"))
 );
-
 AutoMapperConfiguration.Init();
 
 #region DI setup
+
+builder.Services.AddScoped<IIncludeHelper<Car>, CarIncludeHelper>();
+builder.Services.AddScoped<IIncludeHelper<User>, UserIncludeHelper>();
 
 builder.Services.AddScoped<IRepository<Car>, RepositoryBase<Car>>();
 builder.Services.AddScoped<IRepository<User>, RepositoryBase<User>>();
