@@ -1,7 +1,6 @@
 ﻿using Cars.Domain.Base;
 using Cars.Domain.Enums;
 using Cars.Domain.Interfaces;
-using Cars.Repository.Validators;
 
 namespace Cars.Domain.Entities
 {
